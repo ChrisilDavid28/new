@@ -1,0 +1,33 @@
+body {
+    background-color: #9F6;
+}
+h1 {
+    color: #C39;
+    text-align: left;
+    text-transform: capitalize;
+    text-decoration: underline;
+}
+p {
+    font-size: 20px;
+    font-family: Verdana, Geneva, sans-serif;
+    background-color: #FFF;
+    color: #963;
+}
+h2 {
+    color: #F03;
+    margin-left: 10px;
+}
+img {
+    border: 5px double #903;
+    width: 400px;
+    height: 300px;
+    margin-left: 10px;
+}
+a {
+    margin-left: 10px;
+}
+a:hover {
+    color: #009;
+    font-size: 18px;
+    font-weight: 700;
+}
