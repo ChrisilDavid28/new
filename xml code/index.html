@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User Info</title>
+</head>
+<body>
+    <form id="myform">
+        <label for="key">Enter ID:</label>
+        <input type="text" id="key" required />
+        <input type="button" value="Submit" onclick="displayUserDetails()" />
+    </form>
+    
+    <div id="userDetails"></div>
+
+    <script type="text/javascript">
+        function displayUserDetails() {
+            const keyId = document.getElementById("key").value;
+            const xmlhttp = new XMLHttpRequest();
+            xmlhttp.open("GET", "StudentDetails.xml", true);
+            xmlhttp.onload = function() {
+                if (xmlhttp.status === 200) {
+                    const xmlDoc = xmlhttp.responseXML;
+                    const users = xmlDoc.getElementsByTagName("PersonDetails");
+                    let userDetails = "<h3>User Details are...</h3><hr>";
+
+                    let found = false;
+                    for (let i = 0; i < users.length; i++) {
+                        const id = users[i].getElementsByTagName("id")[0].textContent;
+                        if (keyId === id) {
+                            userDetails += `
+                                Registration ID: ${id}<br />
+                                Name: ${users[i].getElementsByTagName("name")[0].textContent}<br />
+                                City: ${users[i].getElementsByTagName("city")[0].textContent}<br />
+                                Branch: ${users[i].getElementsByTagName("Branch")[0].textContent}<br />
+                                Year: ${users[i].getElementsByTagName("Year")[0].textContent}<br />
+                            `;
+                            found = true;
+                            break;
+                        }
+                    }
+
+                    if (!found) {
+                        userDetails = "<h3>User not found</h3>";
+                    }
+
+                    document.getElementById("userDetails").innerHTML = userDetails;
+                }
+            };
+            xmlhttp.send();
+        }
+    </script>
+</body>
+</html>
